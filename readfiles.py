@@ -15,10 +15,10 @@ def result(query):
             output.write(str(row) + '\n')
     #print (res.description)
 directory = args[1]
-print(directory)
-#directory = f"ProjectF\Stuff"
+#directory = r"ProjectF\Stuff"
+#print(directory)
 
-with ZipFile(str(directory) + '.zip', 'r') as zipObj:
+with ZipFile(directory + '.zip', 'r') as zipObj:
     stufflist = zipObj.namelist()
 
 directories = []
@@ -30,8 +30,11 @@ currentdir = '/'.join(tempdir)
 for item in stufflist:
     temp = item.split('/')
     fname = temp[-1]
+    check = list(fname)
     ftemp = fname.split('.')
-    if len(ftemp) >= 2:
+    if fname.startswith('.'):
+        continue
+    elif len(ftemp) >= 2:
         ext = ftemp[-1]
     else:
         ext = 'None'
